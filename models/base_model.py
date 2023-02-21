@@ -6,6 +6,7 @@ Console Base module
 
 import uuid
 import datetime
+import models
 
 
 class BaseModel():
@@ -23,6 +24,7 @@ class BaseModel():
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.datetime.now()
+            models.storage.new(self)
 
     # __str__ method
     def __str__(self):
@@ -34,6 +36,7 @@ class BaseModel():
         """method that updates the public instance attribute
                         **updated_at** with the current datetime"""
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     # to_dict method
     def to_dict(self):
