@@ -38,11 +38,10 @@ class FileStorage():
     # reload method
     def reload(self):
         """method that deserializes the JSON file"""
-        try:
-            with open(self.__file_path, 'r') as file:
-                obj = json.loads(file.read())
-            for key, value in obj.items():
-                class_name, id = key.split('.')
-                self.__objects[key] = eval(class_name)(**value)
-        except BaseException:
-            pass
+        if (os.path.isfile(self.__file_path)) == False:
+            return
+        with open(self.__file_path, 'r') as file:
+            obj = json.loads(file.read())
+        for key, value in obj.items():
+            class_name, id = key.split('.')
+            self.__objects[key] = eval(class_name)(**value)
