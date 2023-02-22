@@ -67,7 +67,6 @@ class HBNBCommand(cmd.Cmd):
             x = Review()
         x.save()
         print(x.id)
-        return
 
     # do_show method
     def do_show(self, arg):
@@ -86,7 +85,7 @@ class HBNBCommand(cmd.Cmd):
         x = models.storage.all()
         for i in x.keys():
             f = i.split(".")
-            if f[1] == args[1]:
+            if f[1] == args[1] and f[0] == args[0]:
                 print(x[i])
                 return
         print("** no instance found **")
@@ -109,7 +108,7 @@ class HBNBCommand(cmd.Cmd):
         x = models.storage.all()
         for i in x.keys():
             f = i.split(".")
-            if f[1] == args[1]:
+            if f[1] == args[1] and f[0] == args[0]:
                 x.pop(i)
                 models.storage.save()
                 return
