@@ -3,7 +3,6 @@
 """
 Class of User
 """
-
 from models.base_model import BaseModel
 
 
