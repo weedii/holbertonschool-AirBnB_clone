@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-The base model for our console
+The Console
 """
 import cmd
 from models.base_model import BaseModel
@@ -10,20 +10,28 @@ import json
 
 
 class HBNBCommand(cmd.Cmd):
-    intro = "This is the console for our AirBnb clone project , you can get documentation by typing the help command"
+
     prompt = "(hbnb)"
 
+    # quit method
     def do_quit(self, arg):
         """This command quits the console"""
         print("Exiting ...")
         return True
-    
+
+    # EOF method
     def do_EOF(self, arg):
         """
         This command quits the console
         """
         print("Exiting ...")
         return True
+
+    # emptyline method
+    def emptyline(self):
+        """if line is empty do nothing"""
+        pass
+
     def do_create(self, arg):
         if len(arg) == 0:
             print("** class name missing **")
@@ -75,6 +83,6 @@ class HBNBCommand(cmd.Cmd):
             l.append(x[i].__str__())
         print(l)
     def do_update(self, arg):
-        
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
