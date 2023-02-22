@@ -133,7 +133,8 @@ class HBNBCommand(cmd.Cmd):
         x = models.storage.all()
         to_upd = 0
         for i in x.keys():
-            if i[10:] == args[1]:
+            k = i.split(".")
+            if k[1] == args[1]:
                 to_upd = 1
                 f = i
         if to_upd == 0:
