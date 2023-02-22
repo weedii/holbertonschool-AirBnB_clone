@@ -106,7 +106,37 @@ class HBNBCommand(cmd.Cmd):
 
     # do_update method
     def do_update(self, arg):
-        pass
+        args = arg.split(" ")
+        if len(arg) == 0:
+            print("* class name missing *")
+            return
+        if args[0] != "BaseModel":
+            print("* class doesn't exist *")
+            return
+        if len(args) == 1:
+            print("* instance id missing *")
+            return
+        x = models.storage.all()
+        to_upd = 0
+        for i in x.keys():
+            if i[10:] == args[1]:
+                to_upd = 1
+                f = i
+        if to_upd == 0:
+            print("* no instance found *")
+            return
+        if len(args) == 2:
+            print("* attribute name missing *")
+            return
+        if len(args) == 3:
+            print("* value missing *")
+            return
+        args  = args[0] +" "+ args[1]+" "+args[2]+" "+ args[3]
+        args = args.split(" ")
+        k = x[f].__dict__
+        p = args[3].split("\"")
+        k[args[2]] = p[1]
+        x[f].save
 
 
 if __name__ == '__main__':
