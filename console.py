@@ -43,7 +43,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         if arg != "BaseModel":
-            print("** class doesn't exist ** ")
+            print("** class doesn't exist **")
             return
         x = BaseModel()
         x.save()
@@ -55,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
         """method that Prints the string representation of
                     an instance based on the class name and id"""
         if len(arg) == 0:
-            print("** class name missing *")
+            print("** class name missing **")
             return
         if arg[0:9] != "BaseModel":
             print("** class doesn't exist **")
