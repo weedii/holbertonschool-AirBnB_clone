@@ -60,10 +60,10 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if arg[0:9] != "BaseModel" and arg[0:4] != "User":
+        if (arg[0:9] != "BaseModel" and arg[0:4] != "User"):
             print("** class doesn't exist **")
             return
-        if len(arg[10:]) == 0:
+        if ((len(arg[10:]) == 0) or (len(arg[5:]) == 0)):
             print("** instance id missing **")
             return
         x = models.storage.all()
@@ -104,7 +104,7 @@ class HBNBCommand(cmd.Cmd):
         if arg == "BaseModel" or arg == "User" or len(arg) == 0:
             for i in x.keys():
                 f = i.split(".")
-                if f== "BaseModel" and arg == "BaseModel":
+                if f == "BaseModel" and arg == "BaseModel":
                     lis.append(x[i].__str__())
                 elif f == "User" and arg == "User":
                     lis.append(x[i].__str__())
