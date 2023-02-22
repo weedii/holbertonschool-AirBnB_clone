@@ -9,8 +9,14 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import models
 from models.user import User
+from models.state import State
+from models.place import Place
+from models.review import Review
+from models.city import City
+from models.amenity import Amenity
 
 
+l = ["User", "BaseModel", "State", "Place", "Review", "City", "Amenity"]
 class HBNBCommand(cmd.Cmd):
     """Class of HBNBCommand"""
 
@@ -42,13 +48,23 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if arg != "BaseModel" and arg != "User":
+        if arg not in l:
             print("** class doesn't exist **")
             return
         if arg == "BaseModel":
             x = BaseModel()
         elif arg == "User":
             x = User()
+        elif arg == "State":
+            x = State()
+        elif arg == "Place":
+            x = Place()
+        elif arg == "City":
+            x = City()
+        elif arg == "Amenity":
+            x = Amenity()
+        elif arg == "Review":
+            x = Review()
         x.save()
         print(x.id)
         return
@@ -60,15 +76,17 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if (arg[0:9] != "BaseModel" and arg[0:4] != "User"):
+        args = arg.split(" ")
+        if args[0] not in l:
             print("** class doesn't exist **")
             return
-        if ((len(arg[10:]) == 0) or (len(arg[5:]) == 0)):
+        if len(args) != 2:
             print("** instance id missing **")
             return
         x = models.storage.all()
         for i in x.keys():
-            if i[10:] == arg[10:]:
+            f = i.split(".")
+            if f[1] == args[1]:
                 print(x[i])
                 return
         print("** no instance found **")
@@ -79,10 +97,11 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if arg[:9] != "BaseModel" and arg[0:4] != "User":
+        args = arg.split(" ")
+        if args[0] not in l:
             print("** class doesn't exist **")
             return
-        if len(arg[9:]) == 0:
+        if len(args) != 2:
             print("** instance id missing **")
             return
         args = arg.split(" ")
@@ -101,7 +120,8 @@ class HBNBCommand(cmd.Cmd):
                     all instances based or not on the class name"""
         lis = []
         x = models.storage.all()
-        if arg == "BaseModel" or arg == "User" or len(arg) == 0:
+        args = arg.split(" ")
+        if args[0] in l or len(arg) == 0:
             for i in x.keys():
                 f = i.split(".")
                 if f == "BaseModel" and arg == "BaseModel":
@@ -124,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if args[0] != "BaseModel" and args[0] != "User":
+        if args[0] not in l:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
