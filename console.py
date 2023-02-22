@@ -106,6 +106,9 @@ class HBNBCommand(cmd.Cmd):
 
     # do_update method
     def do_update(self, arg):
+        """method that Updates an instance based on the
+                    class name and id by adding or updating attribute
+                                (save the change into the JSON file)"""
         args = arg.split(" ")
         if len(arg) == 0:
             print("** class name missing **")
@@ -131,7 +134,7 @@ class HBNBCommand(cmd.Cmd):
         if len(args) == 3:
             print("** value missing **")
             return
-        args  = args[0] +" "+ args[1]+" "+args[2]+" "+ args[3]
+        args = args[0] + " " + args[1]+" "+args[2]+" " + args[3]
         args = args.split(" ")
         k = x[f].__dict__
         p = args[3].split("\"")
