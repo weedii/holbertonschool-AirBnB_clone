@@ -1,7 +1,9 @@
 #!/usr/bin/python3
+
 """
 The Console
 """
+
 import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
@@ -10,8 +12,9 @@ import json
 
 
 class HBNBCommand(cmd.Cmd):
+    """Class of HBNBCommand"""
 
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     # quit method
     def do_quit(self, arg):
@@ -32,7 +35,10 @@ class HBNBCommand(cmd.Cmd):
         """if line is empty do nothing"""
         pass
 
+    # do_create method
     def do_create(self, arg):
+        """method that Creates a new instance of BaseModel,
+                    saves it (to the JSON file) and prints the id"""
         if len(arg) == 0:
             print("** class name missing **")
             return
@@ -43,7 +49,11 @@ class HBNBCommand(cmd.Cmd):
         x.save()
         print(x.id)
         return
+
+    # do_show method
     def do_show(self, arg):
+        """method that Prints the string representation of
+                    an instance based on the class name and id"""
         if len(arg) == 0:
             print("** class name missing *")
             return
@@ -59,7 +69,10 @@ class HBNBCommand(cmd.Cmd):
                 print(x[i])
                 return
         print("** no instance found **")
+
+    # do_destroy method
     def do_destroy(self, arg):
+        """method that Deletes an instance based on the class name and id"""
         if len(arg) == 0:
             print("** class name missing **")
             return
@@ -76,13 +89,25 @@ class HBNBCommand(cmd.Cmd):
                 models.storage.save()
                 return
         print("** no instance found **")
+
+    # do_all method
     def do_all(self, arg):
+        """method that Prints all string representation of
+                    all instances based or not on the class name"""
+        lis = []
         x = models.storage.all()
-        l = []
-        for i in x.keys():
-            l.append(x[i].__str__())
-        print(l)
+        if arg == "BaseModel" or arg == "":
+            for i in x.keys():
+                lis.append(x[i].__str__())
+            print(lis)
+        else:
+            print("** class doesn't exist **")
+            return
+
+    # do_update method
     def do_update(self, arg):
+        pass
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
