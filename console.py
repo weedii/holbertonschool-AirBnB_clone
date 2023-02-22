@@ -8,7 +8,7 @@ import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import models
-import json
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -42,10 +42,13 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if arg != "BaseModel":
+        if arg != "BaseModel" and arg != "User":
             print("** class doesn't exist **")
             return
-        x = BaseModel()
+        if arg == "BaseModel":
+            x = BaseModel()
+        elif arg == "User":
+            x = User()
         x.save()
         print(x.id)
         return
@@ -57,7 +60,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if arg[0:9] != "BaseModel":
+        if arg[0:9] != "BaseModel" and arg[0:4] != "User":
             print("** class doesn't exist **")
             return
         if len(arg[10:]) == 0:
@@ -76,16 +79,18 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if arg[:9] != "BaseModel":
+        if arg[:9] != "BaseModel" and arg[0:4] != "User":
             print("** class doesn't exist **")
             return
         if len(arg[9:]) == 0:
             print("** instance id missing **")
             return
+        args = arg.split(" ")
         x = models.storage.all()
         for i in x.keys():
-            if i[10:] == arg[10:]:
-                x.pop("BaseModel." + i[10:])
+            f = i.split(".")
+            if f[1] == args[1]:
+                x.pop(i)
                 models.storage.save()
                 return
         print("** no instance found **")
@@ -96,9 +101,15 @@ class HBNBCommand(cmd.Cmd):
                     all instances based or not on the class name"""
         lis = []
         x = models.storage.all()
-        if arg == "BaseModel" or arg == "":
+        if arg == "BaseModel" or arg == "User" or len(arg) == 0:
             for i in x.keys():
-                lis.append(x[i].__str__())
+                f = i.split(".")
+                if f== "BaseModel" and arg == "BaseModel":
+                    lis.append(x[i].__str__())
+                elif f == "User" and arg == "User":
+                    lis.append(x[i].__str__())
+                else:
+                    lis.append(x[i].__str__())
             print(lis)
         else:
             print("** class doesn't exist **")
@@ -113,7 +124,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if args[0] != "BaseModel":
+        if args[0] != "BaseModel" and args[0] != "User":
             print("** class doesn't exist **")
             return
         if len(args) == 1:
