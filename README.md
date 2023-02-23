@@ -78,6 +78,8 @@ To quit the console, enter the command `quit`, or input an EOF signal
 
 ```
 $ ./console.py
+
+```
 (hbnb) quit
 $
 ```
