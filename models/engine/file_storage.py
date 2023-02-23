@@ -28,13 +28,13 @@ class FileStorage():
 
     # new method
     def new(self, obj):
-        """method that sets in __objects the obj with key <obj class name>.id"""
+        """method that sets in __objects the obj with key<obj class name>.id"""
         key = obj.__class__.__name__ + "." + obj.id
         self.__objects[key] = obj
 
     # save method
     def save(self):
-        """method that serializes __objects to the JSON file (path: __file_path)"""
+        """method that serializes __objects to JSON file (path: __file_path)"""
         obj_dict = {}
         for key, obj in self.__objects.items():
             obj_dict[key] = obj.to_dict()
@@ -44,7 +44,7 @@ class FileStorage():
     # reload method
     def reload(self):
         """method that deserializes the JSON file"""
-        if (os.path.isfile(self.__file_path)) == False:
+        if (os.path.isfile(self.__file_path)) is False:
             return
         with open(self.__file_path, 'r') as file:
             obj = json.loads(file.read())
