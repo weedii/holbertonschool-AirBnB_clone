@@ -16,7 +16,9 @@ from models.city import City
 from models.amenity import Amenity
 
 
-l = ["User", "BaseModel", "State", "Place", "Review", "City", "Amenity"]
+lst = ["User", "BaseModel", "State", "Place", "Review", "City", "Amenity"]
+
+
 class HBNBCommand(cmd.Cmd):
     """Class of HBNBCommand"""
 
@@ -48,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if arg not in l:
+        if arg not in lst:
             print("** class doesn't exist **")
             return
         if arg == "BaseModel":
@@ -76,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         args = arg.split(" ")
-        if args[0] not in l:
+        if args[0] not in lst:
             print("** class doesn't exist **")
             return
         if len(args) != 2:
@@ -98,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         args = arg.split(" ")
-        if args[0] not in l:
+        if args[0] not in lst:
             print("** class doesn't exist **")
             return
         if len(args) != 2:
@@ -121,7 +123,7 @@ class HBNBCommand(cmd.Cmd):
         lis = []
         x = models.storage.all()
         args = arg.split(" ")
-        if args[0] in l or len(arg) == 0:
+        if args[0] in lst or len(arg) == 0:
             for i in x.keys():
                 f = i.split(".")
                 if f == "BaseModel" and arg == "BaseModel":
@@ -144,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) == 0:
             print("** class name missing **")
             return
-        if args[0] not in l:
+        if args[0] not in lst:
             print("** class doesn't exist **")
             return
         if len(args) == 1:
