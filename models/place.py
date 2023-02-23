@@ -1,11 +1,15 @@
 #!/usr/bin/python3
-"""
 
 """
+Class of Place
+"""
+
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
+    """Place Class that inherit from BaseModel Class"""
+
     city_id = ""
     user_id = ""
     name = ""
@@ -17,6 +21,8 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = []
+
+    # __str__ method
     def __str__(self):
         """method that return string representation of an instance"""
         return f"[{Place.__name__}] ({self.id}) {self.__dict__}"
