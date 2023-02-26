@@ -107,5 +107,5 @@ $
 ---
 
 ## Authors :black_nib:
-* Amine Khammassi <[Amine Khammassi](https://github.com/aminekham)> Email:<>
+* Amine Khammassi <[Amine Khammassi](https://github.com/aminekham)> Email:<5785@holbertonstudents.com>
 * Wael Abidi <[Wael Abidi](https://github.com/weedii)> Email: <5684@holbertonstudents.com>
