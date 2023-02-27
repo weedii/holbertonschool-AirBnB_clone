@@ -103,6 +103,8 @@ Exiting ...
 | quit     | Exits concol                                |
 
 
+## Exemples:
+
 $ ./console.py
 
 ```
