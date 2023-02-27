@@ -32,6 +32,12 @@
 
 ---
 
+## Requirements:
+
+```
+You need to install python3
+```
+
 ## Installation
 
 First things first cloning
